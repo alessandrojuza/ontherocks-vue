@@ -5,30 +5,71 @@
       <div class="search-bar">
         <input
           type="text"
-          value=""
+          v-model="searchQuery"
           class="search-bar-input"
           placeholder="Enter Your Favorite Cocktail:"
+          @input="callCocktailApi"
         />
-        <CloseIcon class="close-icon" onClick="{}" />
+        <img
+          src="./assets/img/close-icon.svg"
+          alt="close icon"
+          class="close-icon"
+        />
       </div>
     </div>
+    <div className="result-container">
+      <CocktailResult name="gianni" />
+    </div>
   </div>
-
-  <div className="result-container"></div>
 </template>
 
 <script>
-// import CocktailResult from "./components/CocktailResult.vue";
+import CocktailResult from "./components/CocktailResult.vue";
+import axios from "axios";
+// import Vuex from "vuex";
 
 export default {
   name: "App",
+  data() {
+    return {
+      cocktailArray: "",
+      searchQuery: "",
+    };
+  },
   components: {
     CocktailResult,
+  },
+  methods: {
+    callCocktailApi() {
+      axios
+        .get(
+          `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.searchQuery}
+    ` // API Call
+        )
+        .then((res) => {
+          this.cocktailArray = JSON.parse(
+            JSON.stringify(res.data.drinks || [])
+          );
+          // Only render results if an array is fetched
+
+          // console.log(this.searchQuery);
+          // console.log(this.cocktailArray);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
 
 <style>
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -75,7 +116,7 @@ export default {
   align-items: center;
 
   width: 100%;
-  border-bottom: 2px solid $transparent-white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.514);
 }
 
 .logo {
@@ -123,16 +164,15 @@ export default {
 }
 
 .close-icon {
-  transition: color 0.5s;
+  height: 20px;
 }
 
 .close-icon:hover {
   cursor: pointer;
-  color: $transparent-white;
 }
 
 .result-container {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   padding-top: 0px;
 }
 </style>
