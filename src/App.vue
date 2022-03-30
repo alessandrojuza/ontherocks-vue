@@ -14,11 +14,17 @@
           src="./assets/img/close-icon.svg"
           alt="close icon"
           class="close-icon"
+          v-on:click="clearInput"
         />
       </div>
     </div>
-    <div className="result-container">
-      <CocktailResult name="gianni" />
+    <div class="result-container">
+      <ul v-for="(cocktail, index) in cocktailArray" :key="cocktail.key">
+        <CocktailResult
+          :cocktailName="this.cocktailArray[index].strDrink"
+          :cocktailImg="this.cocktailArray[index].strDrinkThumb"
+        />
+      </ul>
     </div>
   </div>
 </template>
@@ -26,7 +32,6 @@
 <script>
 import CocktailResult from "./components/CocktailResult.vue";
 import axios from "axios";
-// import Vuex from "vuex";
 
 export default {
   name: "App",
@@ -34,6 +39,7 @@ export default {
     return {
       cocktailArray: "",
       searchQuery: "",
+      cocktailName: "",
     };
   },
   components: {
@@ -50,14 +56,21 @@ export default {
           this.cocktailArray = JSON.parse(
             JSON.stringify(res.data.drinks || [])
           );
+
+          this.cocktailName = this.cocktailArray[0].strDrink;
+
           // Only render results if an array is fetched
 
-          // console.log(this.searchQuery);
-          // console.log(this.cocktailArray);
+          console.log(this.cocktailArray);
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+
+    clearInput() {
+      this.cocktailArray = "";
+      this.searchQuery = "";
     },
   },
 };
@@ -172,7 +185,7 @@ body {
 }
 
 .result-container {
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   padding-top: 0px;
 }
 </style>

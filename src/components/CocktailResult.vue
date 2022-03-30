@@ -1,7 +1,7 @@
 <template>
   <div class="cocktail-result">
-    <img src="{img}" alt="cocktail-image" />
-    <p>{{ name }}</p>
+    <img :src="cocktailImg" alt="cocktail-image" />
+    <p>{{ cocktailName }}</p>
     <div class="explore-button">
       <img
         src="../assets/img/arrow-forward-icon.svg"
@@ -16,12 +16,16 @@
 export default {
   name: "CocktailResult",
   props: {
-    msg: String,
+    cocktailName: {
+      type: String,
+    },
+    cocktailImg: {
+      type: String,
+    },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cocktail-result {
   box-sizing: border-box;
