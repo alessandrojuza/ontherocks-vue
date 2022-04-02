@@ -204,4 +204,70 @@ body {
   overflow-y: scroll;
   padding-top: 0px;
 }
+
+@media screen and (max-height: 1024px) {
+  .main-container {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main-container {
+    height: 90vh;
+    width: 600px;
+  }
+
+  .search-bar-container {
+    width: 80%;
+  }
+
+  .search-bar {
+    width: 500px;
+  }
+
+  .search-bar-input {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-container {
+    height: 90vh;
+    width: 480px;
+  }
+
+  .search-bar-container {
+    width: 80%;
+  }
+
+  .search-bar {
+    width: 460px;
+  }
+
+  .search-bar-input {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-container {
+    width: 340px;
+  }
+
+  .search-bar-container {
+    width: 80%;
+  }
+
+  .search-bar {
+    width: 320px;
+  }
+
+  .search-bar-input {
+    width: 250px;
+  }
+
+  .search-bar-input::placeholder {
+    font-size: 13pt;
+  }
+}
 </style>

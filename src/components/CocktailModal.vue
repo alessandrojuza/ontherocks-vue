@@ -145,4 +145,31 @@ p {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 991px) {
+  .cocktail-modal {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cocktail-modal {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 0.9fr;
+
+    grid-template-areas:
+      "div1"
+      "div2" "div3";
+
+    height: 700px;
+  }
+  img {
+    margin-bottom: 40px;
+  }
+
+  h4,
+  p {
+    text-align: center;
+  }
+}
 </style>
