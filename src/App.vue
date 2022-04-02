@@ -26,10 +26,6 @@
           :cocktailGlass="this.cocktailArray[index].strGlass"
           :cocktailInstructions="this.cocktailArray[index].strInstructions"
           :modalClass="this.modalClass"
-          :modalName="this.modalName"
-          :modalImg="this.modalImg"
-          :modalGlass="this.modalGlass"
-          :modalInstructions="this.modalInstructions"
           @openModal="changeModalVisibility"
         />
       </ul>
@@ -55,11 +51,6 @@ export default {
       cocktailInstructions: "",
 
       modalClass: "hidden",
-
-      modalName: "",
-      modalImg: "",
-      modalGlass: "",
-      modalInstructions: "",
     };
   },
   components: {
@@ -75,14 +66,10 @@ export default {
         )
         .then((res) => {
           this.cocktailArray = JSON.parse(
+            // Only render results if an array is fetched
             JSON.stringify(res.data.drinks || [])
           );
-
           this.cocktailName = this.cocktailArray[0].strDrink;
-
-          // Only render results if an array is fetched
-
-          console.log(this.cocktailArray);
         })
         .catch((error) => {
           console.log(error);
@@ -96,7 +83,6 @@ export default {
 
     changeModalVisibility() {
       this.modalClass = "";
-      console.log("I'm working");
     },
 
     hideModal() {

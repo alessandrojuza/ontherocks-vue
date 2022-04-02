@@ -28,28 +28,8 @@ export default {
     cocktailInstructions: {
       type: String,
     },
-    modalName: {
-      type: String,
-    },
-    modalImg: {
-      type: String,
-    },
-    modalGlass: {
-      type: String,
-    },
-    modalInstructions: {
-      type: String,
-    },
     modalClass: {
       type: String,
-    },
-    methods: {
-      setModalData() {
-        modalName = cocktailName;
-        modalImg = cocktailImg;
-        modalGlass = cocktailGlass;
-        modalInstructions = cocktailInstructions;
-      },
     },
   },
 };
