@@ -1,5 +1,5 @@
 <template>
-  <div class="cocktail-result">
+  <div class="cocktail-result" @click="$emit('openModal')">
     <img :src="cocktailImg" alt="cocktail-image" />
     <p>{{ cocktailName }}</p>
     <div class="explore-button">
@@ -21,6 +21,35 @@ export default {
     },
     cocktailImg: {
       type: String,
+    },
+    cocktailGlass: {
+      type: String,
+    },
+    cocktailInstructions: {
+      type: String,
+    },
+    modalName: {
+      type: String,
+    },
+    modalImg: {
+      type: String,
+    },
+    modalGlass: {
+      type: String,
+    },
+    modalInstructions: {
+      type: String,
+    },
+    modalClass: {
+      type: String,
+    },
+    methods: {
+      setModalData() {
+        modalName = cocktailName;
+        modalImg = cocktailImg;
+        modalGlass = cocktailGlass;
+        modalInstructions = cocktailInstructions;
+      },
     },
   },
 };

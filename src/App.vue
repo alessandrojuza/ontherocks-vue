@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="main-container" v-on:openModal="changeModalVisibility">
     <div class="search-bar-container">
       <img src="./assets/img/logo.png" alt="logo" class="logo" />
       <div class="search-bar">
@@ -23,14 +23,24 @@
         <CocktailResult
           :cocktailName="this.cocktailArray[index].strDrink"
           :cocktailImg="this.cocktailArray[index].strDrinkThumb"
+          :cocktailGlass="this.cocktailArray[index].strGlass"
+          :cocktailInstructions="this.cocktailArray[index].strInstructions"
+          :modalClass="this.modalClass"
+          :modalName="this.modalName"
+          :modalImg="this.modalImg"
+          :modalGlass="this.modalGlass"
+          :modalInstructions="this.modalInstructions"
+          @openModal="changeModalVisibility"
         />
       </ul>
     </div>
+    <CocktailModal :modalClass="this.modalClass" @closeModal="hideModal" />
   </div>
 </template>
 
 <script>
 import CocktailResult from "./components/CocktailResult.vue";
+import CocktailModal from "./components/CocktailModal.vue";
 import axios from "axios";
 
 export default {
@@ -40,10 +50,21 @@ export default {
       cocktailArray: "",
       searchQuery: "",
       cocktailName: "",
+      cocktailImg: "",
+      cocktailGlass: "",
+      cocktailInstructions: "",
+
+      modalClass: "hidden",
+
+      modalName: "",
+      modalImg: "",
+      modalGlass: "",
+      modalInstructions: "",
     };
   },
   components: {
     CocktailResult,
+    CocktailModal,
   },
   methods: {
     callCocktailApi() {
@@ -71,6 +92,15 @@ export default {
     clearInput() {
       this.cocktailArray = "";
       this.searchQuery = "";
+    },
+
+    changeModalVisibility() {
+      this.modalClass = "";
+      console.log("I'm working");
+    },
+
+    hideModal() {
+      this.modalClass = "hidden";
     },
   },
 };
